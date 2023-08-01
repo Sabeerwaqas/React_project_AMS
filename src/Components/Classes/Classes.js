@@ -1,6 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../Students/student.css";
 import { TextField } from "@mui/material";
+import { db } from "../../Firebase/firebase";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  doc,
+  deleteDoc,
+} from "firebase/firestore";
+// import { deleteUser } from "firebase/firestore";
 
 const Classes = () => {
   const [className, setClassName] = useState("");
@@ -8,6 +17,31 @@ const Classes = () => {
   const [classLimit, setClassLimit] = useState();
 
   const [inputData, setInputData] = useState([]);
+
+  const [classes, setClasses] = useState([]);
+  const usersCollectionRef = collection(db, "classes");
+
+  const createClass = async () => {
+    try {
+      await addDoc(usersCollectionRef, {
+        class: className,
+        teacher: classTeacher,
+        limit: classLimit,
+      });
+      console.log("Class added successfully!");
+    } catch (error) {
+      console.error("Error adding class:", error);
+    }
+  };
+
+  useEffect(() => {
+    const getUsers = async () => {
+      const classesDoc = await getDocs(usersCollectionRef);
+      setClasses(classesDoc.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+
+    getUsers();
+  }, [classes]);
 
   const handleClassName = (e) => {
     const className = e.target.value;
@@ -31,22 +65,29 @@ const Classes = () => {
       id: Date.now(),
       className: className,
       classTeacher: classTeacher,
-      classLimit: classLimit
+      classLimit: classLimit,
     };
 
     setInputData([...inputData, newData]);
 
+    createClass();
 
     setClassName("");
     setClassTeacher("");
     setClassLimit("");
+
+
+    // setClasses(classes);
   };
 
-  const handleDelete = (id) => {
-    const updatedData = inputData.filter(
-      (filteredData) => filteredData.id !== id
+  
+
+  const deleteUser = async (id) => {
+    const userDoc = doc(db, "classes", id);
+    await deleteDoc(userDoc);
+    setClasses((prevClasses) =>
+      prevClasses.filter((classData) => classData.id !== id)
     );
-    setInputData(updatedData);
   };
 
   return (
@@ -55,7 +96,7 @@ const Classes = () => {
         <div className="flex-child-one">
           <div>
             <h3 className="teachers-heading teacher">
-              <b>Teachers</b>
+              <b>Classes</b>
             </h3>
             <table>
               <thead>
@@ -67,23 +108,23 @@ const Classes = () => {
                 </tr>
               </thead>
               <tbody>
-                {inputData.map((newData, index) => (
+                {classes.map((classData, index) => (
                   <tr key={index}>
                     <td className="teacher-headings-data-table email-teacher">
-                      {newData.className}
+                      {classData.className}
                     </td>
                     <td className="teacher-headings-data-table number-teacher">
-                      {newData.classTeacher}
+                      {classData.classTeacher}
                     </td>
                     <td className="teacher-headings-data-table action-teacher">
-                      {newData.classLimit}
+                      {classData.classLimit}
                     </td>
                     <td className="teacher-headings-data-table action-teacher">
                       <button
                         className="delete-teacher"
-                        onClick={() => handleDelete(newData.id)}
+                        onClick={() => deleteUser(classData.id)}
                       >
-                        Delete
+                        Delete  
                       </button>
                     </td>
                   </tr>

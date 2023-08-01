@@ -9,7 +9,7 @@ const Student = () => {
   const [classes, setClass] = useState("");
 
   const [inputData, setInputData] = useState([]);
-  const [lastStudentNumber, setLastStudentNumber] = useState(0); // State to keep track of the last assigned student number
+  const [lastStudentNumber, setLastStudentNumber] = useState(0); 
 
   const handleNumber = (e) => {
     const number = e.target.value;
@@ -36,14 +36,14 @@ const Student = () => {
 
     const newData = {
       id: Date.now(),
-      number: number || lastStudentNumber + 1, // If the number is not provided, assign the next serial number
+      number: number || lastStudentNumber + 1, 
       studentName: studentName,
       fatherName: fatherName,
       classes: classes,
     };
 
     setInputData([...inputData, newData]);
-    setLastStudentNumber(newData.number); // Update the last assigned student number
+    setLastStudentNumber(newData.number); 
 
     setNumber("");
     setStudentName("");
@@ -55,7 +55,7 @@ const Student = () => {
     const updatedData = inputData.filter((filteredData) => filteredData.id !== id);
     setInputData(updatedData);
 
-    // After deletion, reassign student numbers in a serial manner
+
     const updatedDataWithSerialNumbers = updatedData.map((data, index) => {
       return {
         ...data,
@@ -63,7 +63,7 @@ const Student = () => {
       };
     });
     setInputData(updatedDataWithSerialNumbers);
-    setLastStudentNumber(updatedDataWithSerialNumbers.length); // Update the last assigned student number after deletion
+    setLastStudentNumber(updatedDataWithSerialNumbers.length); 
   };
 
   return (
