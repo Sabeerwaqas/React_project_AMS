@@ -5,15 +5,15 @@ import { TextField } from "@mui/material";
 const Student = () => {
   const [studentName, setStudentName] = useState("");
   const [fatherName, setFatherName] = useState("");
-  const [id, setID] = useState("");
+  const [number, setNumber] = useState("");
   const [classes, setClass] = useState("");
-  const [photo, setPhoto] = useState("");
 
   const [inputData, setInputData] = useState([]);
+  const [lastStudentNumber, setLastStudentNumber] = useState(0); // State to keep track of the last assigned student number
 
-  const handleStudentID = (e) => {
-    const id = e.target.value;
-    setID(id);
+  const handleNumber = (e) => {
+    const number = e.target.value;
+    setNumber(number);
   };
 
   const handleStudentName = (e) => {
@@ -31,33 +31,39 @@ const Student = () => {
     setClass(classes);
   };
 
-  const handlePhoto = (e) => {
-    const photo = e.target.value;
-    setPhoto(photo);
-  };
-
   const handleClick = (e) => {
     e.preventDefault();
 
     const newData = {
-      id: id,
+      id: Date.now(),
+      number: number || lastStudentNumber + 1, // If the number is not provided, assign the next serial number
       studentName: studentName,
       fatherName: fatherName,
       classes: classes,
     };
 
     setInputData([...inputData, newData]);
+    setLastStudentNumber(newData.number); // Update the last assigned student number
 
-    setID("");
+    setNumber("");
     setStudentName("");
     setFatherName("");
     setClass("");
-    setPhoto("");
   };
 
   const handleDelete = (id) => {
     const updatedData = inputData.filter((filteredData) => filteredData.id !== id);
     setInputData(updatedData);
+
+    // After deletion, reassign student numbers in a serial manner
+    const updatedDataWithSerialNumbers = updatedData.map((data, index) => {
+      return {
+        ...data,
+        number: index + 1,
+      };
+    });
+    setInputData(updatedDataWithSerialNumbers);
+    setLastStudentNumber(updatedDataWithSerialNumbers.length); // Update the last assigned student number after deletion
   };
 
   return (
@@ -81,7 +87,7 @@ const Student = () => {
               <tbody>
                 {inputData.map((newData, index) => (
                   <tr key={index}>
-                    <td className="teacher-headings-data-table name-teacher">{newData.id}</td>
+                    <td className="teacher-headings-data-table name-teacher">{newData.number}</td>
                     <td className="teacher-headings-data-table email-teacher">{newData.studentName}</td>
                     <td className="teacher-headings-data-table number-teacher">{newData.fatherName}</td>
                     <td className="teacher-headings-data-table action-teacher">{newData.classes}</td>
@@ -104,13 +110,13 @@ const Student = () => {
                 <div>
                   <TextField
                     name="student_id"
-                    value={id}
+                    value={number}
                     className="teacher-email-input"
                     size="small"
-                    onChange={handleStudentID}
+                    onChange={handleNumber}
                     type="text"
                     variant="standard"
-                    label="Enter Student's ID"
+                    label="Enter Student's Number"
                   />
                 </div>
                 <div>
@@ -147,18 +153,6 @@ const Student = () => {
                     type="text"
                     variant="standard"
                     label="Enter Class"
-                  />
-                </div>
-                <div>
-                  <TextField
-                    name="student_photo"
-                    className="teacher-email-input"
-                    value={photo}
-                    onChange={handlePhoto}
-                    size="small"
-                    type="file"
-                    variant="standard"
-                    label="Upload Student's Photo"
                   />
                 </div>
                 <button onClick={handleClick} className="add-teacher">
