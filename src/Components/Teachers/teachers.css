@@ -1,0 +1,305 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.flex-container{
+    display: flex;
+    margin-top: 7%;
+    height: 80vh;
+    justify-content: space-around;
+}
+
+.flex-child-one, .flex-child-two{
+    background-color: #FFFFFF;
+    box-shadow: 1px 5px 25px 10px lightgray;
+}
+
+.flex-child-one{
+    width: 50vw;
+    margin-left: 17%;
+}
+
+.flex-child-two{
+    width: 25vw;
+    margin-left: 0%;
+}
+
+.teachers-heading{
+
+    font-weight: bold;
+    margin-left: 2%;
+}
+
+.form-div{
+    /* background-color: red; */
+    width: 20vw;
+    margin-left: 10%;
+    padding: 2%;
+}
+
+.teacher{
+    border-bottom: 2px solid skyblue;
+    width: 48vw;
+}
+
+.teacher-email-input{
+    margin-top: 8% !important;
+}
+
+.add-teacher{
+    padding: 4%;
+    border: none;
+    color: white;
+    background-color: darkblue;
+    box-shadow: 1px 1px 20px 3px skyblue;
+    font-weight: bold;
+    width: 15vw;
+    margin-top: 15%;
+}
+
+
+.teacher-headings-data{
+    
+    width: 10%;
+    text-align: center;
+    font-weight: bold;
+    background-color: darkcyan;
+    color: #FFFFFF;
+    padding: 0.5%;
+}
+
+
+.teacher-headings-data-table{
+    background-color: navy;
+    color: #FFFFFF;
+    font-weight: bold;
+   
+}
+
+.name-teacher{
+    width: 10%;
+}
+
+.email-teacher{
+    text-align: center;
+    width: 10%;
+}
+
+.number-teacher{
+    text-align: center;
+    width: 10%;
+}
+
+.action-teacher{
+    text-align: right;
+    width: 10%;
+    color: #FFFFFF;
+    /* background-color: red; */
+}
+
+.delete-teacher{
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    border: none;
+}
+
+/* Media queries */
+
+/* For 1025px */
+
+@media screen and (max-width: 1025px) {
+
+    .flex-container{
+        
+        margin-top: 10%;
+       
+    }
+
+    .teacher-headings-data{
+    
+        width: 12%;
+        text-align: center;
+        font-weight: bold;
+        background-color: darkcyan;
+        color: #FFFFFF;
+        padding: 0.5%;
+        font-size: 12px;
+        
+    }
+
+    .teacher-headings-data-table{
+        background-color: navy;
+        color: #FFFFFF;
+        font-weight: bold;
+        font-size: 12px;
+        width: 12%;
+        text-align: center;
+    }
+    
+    
+    
+
+    
+}
+
+/* For 769px */
+
+@media screen and (max-width: 769px) {
+
+    .flex-container{
+        
+        margin-top: 10%;
+       
+    }
+
+    .teacher-headings-data{
+    
+        width: 12%;
+        text-align: center;
+        font-weight: bold;
+        background-color: darkcyan;
+        color: #FFFFFF;
+        padding: 0.5%;
+        font-size: 10px;
+        
+    }
+
+    .teacher-headings-data-table{
+        background-color: navy;
+        color: #FFFFFF;
+        font-weight: bold;
+        font-size: 10px;
+        width: 12%;
+        text-align: center;
+    }
+
+    
+    
+    
+
+    
+}
+
+/* For 481px */
+
+@media screen and (max-width: 481px) {
+
+    .flex-container{
+        
+        margin-top: 10%;
+        flex-direction: column-reverse;
+       
+    }
+
+    .teacher-headings-data{
+    
+        width: 12%;
+        text-align: center;
+        padding: 0.5%;
+        font-size: 10px;
+        
+    }
+
+    .teacher-headings-data-table{
+        font-size: 10px;
+        width: 12%;
+        text-align: center;
+    }
+
+    .flex-child-two{
+        width: 75vw;
+        margin-top: 10%;
+        margin-left: 20%;
+    }
+    
+
+    .teacher-email-input{
+        margin-top: 8% !important;
+        width: 55vw;
+    }
+    
+    .add-teacher{
+       
+        width: 55vw;
+        margin-top: 30%;
+    }
+
+    .heading-one{
+        margin-left: 12%;
+        border-bottom: 2px solid gray;
+        width: 55vw;
+    }
+
+    .flex-child-one{
+        width: 75vw;
+        margin-left: 20%;
+        margin-top: 5%;
+    }
+    
+    
+ 
+}
+
+/* For 320px */
+
+@media screen and (max-width: 320px) {
+
+    .flex-container{
+        
+        margin-top: 10%;
+        flex-direction: column-reverse;
+       
+    }
+
+    .teacher-headings-data{
+    
+        width: 12%;
+        text-align: center;
+        padding: 0.5%;
+        font-size: 7px;
+        font-weight: bold;
+        
+    }
+
+    .teacher-headings-data-table{
+        font-size: 7px;
+        width: 12%;
+        text-align: center;
+    }
+
+    .flex-child-two{
+        width: 75vw;
+        margin-top: 10%;
+        margin-left: 20%;
+    }
+    
+
+    .teacher-email-input{
+        margin-top: 8% !important;
+        width: 55vw;
+    }
+    
+    .add-teacher{
+       
+        width: 55vw;
+        margin-top: 30%;
+    }
+
+    .heading-one{
+        margin-left: 12%;
+        border-bottom: 2px solid gray;
+        width: 55vw;
+    }
+
+    .flex-child-one{
+        width: 75vw;
+        margin-left: 20%;
+        margin-top: 5%;
+    }
+    
+    
+ 
+}

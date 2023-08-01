@@ -1,0 +1,100 @@
+body{
+    background-color: #F5F4F6 !important;
+}
+
+.header{
+    background-color: #FFFFFF !important;
+}
+
+.header-heading{
+    color: black;
+    font-weight: bold    ;
+}
+
+.sidebar-handler{
+    color: black !important;
+}
+
+.flex-dashboard{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.flex-child{
+    background-color: #FFFFFF;
+    padding: 4%;
+    width: 17vw;
+}
+
+.position-rel{
+    position: relative;
+    top: 2rem;
+    right: 2rem;
+    font-weight: bold;
+    font-size: 1rem;
+    text-align: center;
+    border-bottom: 2px solid gray;
+    
+}
+
+.flex-grandchild{
+    display: flex !important;
+    justify-content: space-around;
+    background-color: orange;
+    height: 0vh;
+    /* height: rem !important; */
+}
+
+.icon-person{
+    font-size: 4rem !important;
+    /* background-color: aqua; */
+    position: relative;
+    bottom: 3rem;
+    right: 3.5rem;
+
+}
+
+.heading-son{
+    font-size: 3rem;
+    
+}
+
+
+.heading-parent{
+    position: relative;
+    bottom: 5.5rem;
+    left: 3rem;
+}
+
+.student{
+    color: black;
+    font-weight: bolder;
+    border-bottom: 2px solid gray;
+}
+
+.navbar-label{
+    
+    /* background-color: aqua; */
+    position: absolute;
+
+}
+
+/* Media queries */
+
+/* For 481px */
+
+@media screen and (max-width: 481px){
+
+    .student{
+        font-size: 15px !important;
+    }
+}
+
+/* For 320px */
+
+@media screen and (max-width: 320px){
+
+    .student{
+        font-size: 10px !important;
+    }
+}
