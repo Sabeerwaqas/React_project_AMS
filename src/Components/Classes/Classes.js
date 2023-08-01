@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../Students/student.css";
 import { TextField } from "@mui/material";
-import { db } from "../../Firebase/firebase";
+import { db, auth } from "../../Firebase/firebase";
 import {
   collection,
   getDocs,
@@ -29,6 +29,15 @@ const Classes = () => {
         limit: classLimit,
       });
       console.log("Class added successfully!");
+  
+      const newData = {
+        id: Date.now(),
+        className: className,
+        classTeacher: classTeacher,
+        classLimit: classLimit,
+      };
+  
+      setClasses((prevClasses) => [...prevClasses, newData]);
     } catch (error) {
       console.error("Error adding class:", error);
     }
@@ -36,13 +45,17 @@ const Classes = () => {
 
   useEffect(() => {
     const getUsers = async () => {
-      const classesDoc = await getDocs(usersCollectionRef);
-      setClasses(classesDoc.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    };
-
+      const querySnapshot = await getDocs(usersCollectionRef);
+      const classesData = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setClasses(classesData);
+    };  
+  
     getUsers();
-  }, [classes]);
-
+  }, []);
+  
   const handleClassName = (e) => {
     const className = e.target.value;
     setClassName(className);
@@ -75,12 +88,7 @@ const Classes = () => {
     setClassName("");
     setClassTeacher("");
     setClassLimit("");
-
-
-    // setClasses(classes);
   };
-
-  
 
   const deleteUser = async (id) => {
     const userDoc = doc(db, "classes", id);
@@ -124,7 +132,7 @@ const Classes = () => {
                         className="delete-teacher"
                         onClick={() => deleteUser(classData.id)}
                       >
-                        Delete  
+                        Delete
                       </button>
                     </td>
                   </tr>
