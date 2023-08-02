@@ -36,15 +36,17 @@ const App = () => {
         <Routes>
           {user ? ( 
             <>
-              <Route path="/main" element={<Main />} />
+              <Route path="/" element={<Main />} />
               <Route path="/students" element={<Student />} />
               <Route path="/teachers" element={<Teacher />} />
               <Route path="/classes" element={<Classes />} />
+              {/* <Route path="/main" element={<Main />} /> */}
+
             </>
           ) : (
-            <Route path="/" element={<Login />} />
+            <Route path="/login" element={<Login />} />
           )}
-          {user && <Route path="/main" element={<Navigate to="/main" />} />}
+          {user && <Route path="/" element={<Navigate to="/" />} />}
           {!user && isSignupPage && <Route path="/signup" element={<Signup />} />}
         </Routes>
         {!user && isSignupPage && (

@@ -19,7 +19,7 @@ const Login = () => {
         console.log(user);
 
         // Redirect to the dashboard component
-        navigate("/dashboard");
+        navigate("/");
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -32,7 +32,7 @@ const Login = () => {
     <>
       <div className="signup-box">
         <h4 className="signup-heading">
-          <Link to={"/"}>LogIn</Link>
+          <Link to={"/login"}>LogIn</Link>
         </h4>
         <h4 className="signup-heading">
           <Link to={"/signup"}>SignUp</Link>

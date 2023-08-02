@@ -30,7 +30,7 @@ const Signup = () => {
     <>
       <div className="signup-box">
         <h4 className="signup-heading">
-          <Link to={"/"}>LogIn</Link>
+          <Link to={"/login"}>LogIn</Link>
         </h4>
         <h4 className="signup-heading">
           <Link to={"/signup"}>SignUp</Link>

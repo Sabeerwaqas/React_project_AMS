@@ -108,7 +108,7 @@ export default function () {
       .signOut()
       .then(() => {
         // User successfully logged out
-        navigate("/"); // Redirect the user to the login page after logout
+        navigate("/login"); // Redirect the user to the login page after logout
       })
       .catch((error) => {
         console.error("Logout error:", error);
