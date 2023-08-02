@@ -58,19 +58,19 @@ const Classes = () => {
     }
   };
 
+  const getClasses = async () => {
+    try {
+      const querySnapshot = await getDocs(classesCollectionRef);
+      const classesData = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setClasses(classesData);
+    } catch (error) {
+      console.error("Error fetching classes:", error);
+    }
+  };
   useEffect(() => {
-    const getClasses = async () => {
-      try {
-        const querySnapshot = await getDocs(classesCollectionRef);
-        const classesData = querySnapshot.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
-        setClasses(classesData);
-      } catch (error) {
-        console.error("Error fetching classes:", error);
-      }
-    };
 
     getClasses();
   }, []);

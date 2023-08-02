@@ -57,21 +57,21 @@ const Student = () => {
       console.error("Error deleting student:", error);
     }
   };
+  
+  const getStudents = async () => {
+    try {
+      const querySnapshot = await getDocs(studentsCollectionRef);
+      const studentsData = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setStudents(studentsData);
+    } catch (error) {
+      console.error("Error fetching students:", error);
+    }
+  };
 
   useEffect(() => {
-    const getStudents = async () => {
-      try {
-        const querySnapshot = await getDocs(studentsCollectionRef);
-        const studentsData = querySnapshot.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
-        setStudents(studentsData);
-      } catch (error) {
-        console.error("Error fetching students:", error);
-      }
-    };
-
     getStudents();
   }, []);
 

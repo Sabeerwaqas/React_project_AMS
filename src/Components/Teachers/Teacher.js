@@ -44,7 +44,7 @@ const Teacher = () => {
 
   const deleteTeacher = async (id) => {
     try {
-      const teacherDoc = doc(db, "classes", id);
+      const teacherDoc = doc(db, "teachersData", id);
       await deleteDoc(teacherDoc);
 
       setTeachers((prevTeacher) =>
@@ -57,20 +57,20 @@ const Teacher = () => {
     }
   };
 
-  useEffect(() => {
-    const getTeacher = async () => {
-      try {
-        const querySnapshot = await getDocs(teachersCollectionRef);
-        const teachers = querySnapshot.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
-        setTeachers(teachers);
-      } catch (error) {
-        console.error("Error fetching classes:", error);
-      }
-    };
+  const getTeacher = async () => {
+    try {
+      const querySnapshot = await getDocs(teachersCollectionRef);
+      const teachers = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setTeachers(teachers);
+    } catch (error) {
+      console.error("Error fetching classes:", error);
+    }
+  };
 
+  useEffect(() => {
     getTeacher();
   }, []);
 
@@ -81,7 +81,6 @@ const Teacher = () => {
   const handleNameChange = (e) => {
     const name = e.target.value;
     setName(name);
-
     console.log(name);
   };
 

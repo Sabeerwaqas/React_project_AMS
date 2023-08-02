@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { styled, useTheme } from "@mui/material/styles";
 // import "../Main/Sidebar/sidebar.css";
 import PersonIcon from "@mui/icons-material/Person";
@@ -25,7 +25,8 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import HomeIcon from "@mui/icons-material/Home";
-
+import firebase, { db } from "../../Firebase/firebase";
+import { collection, getDocs } from "firebase/firestore";
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -96,6 +97,14 @@ const Drawer = styled(MuiDrawer, {
 export default function () {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [teachers,setTeachers]=useState([]);
+  const teachersCollectionRef = collection(db, "teachersData");
+  const [students, setStudents] = useState([]);
+  const studentsCollectionRef = collection(db, "students");
+  const [classes, setClasses] = useState([]);
+  const classesCollectionRef = collection(db, "classes");
+
+
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -105,9 +114,59 @@ export default function () {
     setOpen(false);
   };
 
+  const fetchTeachersData = async()=>{
+      try {
+        const querySnapshot = await getDocs(teachersCollectionRef);
+        const teachers = querySnapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        setTeachers(teachers);
+      } catch (error) {
+        console.error("Error fetching classes:", error);
+      }
+  }
+
+    useEffect(() => {
+      fetchTeachersData();
+    });
+
+    const getStudentData = async () => {
+      try {
+        const querySnapshot = await getDocs(studentsCollectionRef);
+        const studentsData = querySnapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        setStudents(studentsData);
+      } catch (error) {
+        console.error("Error fetching students:", error);
+      }
+    };
+  
+    useEffect(() => {
+      getStudentData();
+    }, []);
+
+    const getClassesData = async () => {
+      try {
+        const querySnapshot = await getDocs(classesCollectionRef);
+        const classesData = querySnapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        setClasses(classesData);
+      } catch (error) {
+        console.error("Error fetching classes:", error);
+      }
+    };
+    useEffect(() => {
+  
+      getClassesData();
+    }, []);
+
   return (
     <Box sx={{ display: "flex" }}>
-      
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
         <div className="flex-dashboard">
@@ -117,7 +176,7 @@ export default function () {
                 <PersonIcon className="icon-person icon-one" />
               </div>
               <div className="heading-parent">
-                <h2 className="heading-son">2</h2>
+                <h2 className="heading-son">{students.length}</h2>
               </div>
             </div>
             <small className="position-rel">Students</small>
@@ -128,7 +187,7 @@ export default function () {
                 <PeopleAltIcon className="icon-person" />
               </div>
               <div className="heading-parent">
-                <h2 className="heading-son">2</h2>
+                <h2 className="heading-son">{teachers.length}</h2>
               </div>
             </div>
             <small className="position-rel">Teachers</small>
@@ -139,7 +198,7 @@ export default function () {
                 <OtherHousesIcon className="icon-person" />
               </div>
               <div className="heading-parent">
-                <h2 className="heading-son">2</h2>
+                <h2 className="heading-son">{classes.length}</h2>
               </div>
             </div>
             <small className="position-rel">Classes</small>
