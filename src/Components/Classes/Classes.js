@@ -2,22 +2,24 @@ import React, { useEffect, useState } from "react";
 import "./student.css";
 import { TextField } from "@mui/material";
 import { db } from "../../Firebase/firebase";
-import { collection, getDocs, addDoc, doc, deleteDoc } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  doc,
+  deleteDoc,
+} from "firebase/firestore";
 
 const Classes = () => {
-  // State variables
   const [className, setClassName] = useState("");
   const [classTeacher, setClassTeacher] = useState("");
   const [classLimit, setClassLimit] = useState("");
   const [classes, setClasses] = useState([]);
 
-  // Firestore collection reference
   const classesCollectionRef = collection(db, "classes");
 
-  // Function to create a class in Firestore
   const createClass = async () => {
     try {
-      // Add the class data to Firestore
       await addDoc(classesCollectionRef, {
         className: className,
         classTeacher: classTeacher,
@@ -25,7 +27,6 @@ const Classes = () => {
       });
       console.log("Class added successfully!");
 
-      // Update the state with the new class data
       const newData = {
         className: className,
         classTeacher: classTeacher,
@@ -34,7 +35,6 @@ const Classes = () => {
 
       setClasses((prevClasses) => [...prevClasses, newData]);
 
-      // Clear the input fields after adding a class
       setClassName("");
       setClassTeacher("");
       setClassLimit("");
@@ -43,13 +43,11 @@ const Classes = () => {
     }
   };
 
-  // Function to delete a class from Firestore
   const deleteClass = async (id) => {
     try {
       const classDoc = doc(db, "classes", id);
       await deleteDoc(classDoc);
 
-      // Update the state after deleting the class
       setClasses((prevClasses) =>
         prevClasses.filter((classData) => classData.id !== id)
       );
@@ -60,7 +58,6 @@ const Classes = () => {
     }
   };
 
-  // Fetch classes data from Firestore on component mount
   useEffect(() => {
     const getClasses = async () => {
       try {
@@ -78,12 +75,10 @@ const Classes = () => {
     getClasses();
   }, []);
 
-  // Event handlers for input fields
   const handleClassName = (e) => setClassName(e.target.value);
   const handleClassTeacher = (e) => setClassTeacher(e.target.value);
   const handleClassLimit = (e) => setClassLimit(e.target.value);
 
-  // Event handler for adding a class
   const handleClick = (e) => {
     e.preventDefault();
     createClass();

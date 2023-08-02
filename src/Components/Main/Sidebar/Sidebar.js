@@ -4,11 +4,9 @@ import "./sidebar.css";
 import PersonIcon from "@mui/icons-material/Person";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../../Firebase/firebase";
-// import CameraIndoorIcon from "@mui/icons-material/CameraIndoor";
 import GridViewRoundedIcon from "@mui/icons-material/GridViewRounded";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import OtherHousesIcon from "@mui/icons-material/OtherHouses";
-import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
@@ -23,16 +21,8 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import HomeIcon from "@mui/icons-material/Home";
-// import {
-//   ClassOutlined,
-//   ClassRounded,
-//   HomeMaxRounded,
-// } from "@mui/icons-material";
 
-// import Classes from "../../../Classes/Classes";
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -176,9 +166,6 @@ export default function () {
             <Link to={"/classes"}>
               <OtherHousesIcon />
               <span className="navbar-label">Classes</span>
-              {/* <span className="logout-btn-parent">
-                <button className="logout-button" onClick={handleLogout}>Logout</button>
-              </span> */}
             </Link>,
           ].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: "block" }}>
