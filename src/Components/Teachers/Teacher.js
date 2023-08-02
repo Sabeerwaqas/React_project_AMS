@@ -1,14 +1,80 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./teachers.css";
 import { TextField } from "@mui/material";
+import { db } from "../../Firebase/firebase";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  doc,
+  deleteDoc,
+} from "firebase/firestore";
 
 const Teacher = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [number, setNumber] = useState("");
-  const [photo, setPhoto] = useState("");
+  const [teachers, setTeachers] = useState([]);
+  const teachersCollectionRef = collection(db, "teachersData");
 
-  const [inputData, setInputData] = useState([]);
+  const createTeachers = async () => {
+    try {
+      await addDoc(teachersCollectionRef, {
+        email: email,
+        name: name,
+        number: number,
+      });
+      console.log("Teacher added successfully!");
+
+      const newData = {
+        email: email,
+        name: name,
+        number: number,
+      };
+
+      setTeachers((prevTeachers) => [...prevTeachers, newData]);
+
+      setEmail("");
+      setNumber("");
+      setName("");
+    } catch (error) {
+      console.error("Error adding class:", error);
+    }
+  };
+
+  const deleteTeacher = async (id) => {
+    try {
+      const teacherDoc = doc(db, "classes", id);
+      await deleteDoc(teacherDoc);
+
+      setTeachers((prevTeacher) =>
+        prevTeacher.filter((teacherData) => teacherData.id !== id)
+      );
+
+      console.log("Class deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting class:", error);
+    }
+  };
+
+  useEffect(() => {
+    const getTeacher = async () => {
+      try {
+        const querySnapshot = await getDocs(teachersCollectionRef);
+        const teachers = querySnapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        setTeachers(teachers);
+      } catch (error) {
+        console.error("Error fetching classes:", error);
+      }
+    };
+
+    getTeacher();
+  }, []);
+
+  // const [inputData, setInputData] = useState([]);
 
   // Handle values
 
@@ -32,44 +98,13 @@ const Teacher = () => {
     console.log(number);
   };
 
-
-  const handlePhoto = (e) => {
-    const teacherPhoto = e.target.value;
-    setPhoto(teacherPhoto)
-  }
-
   // Read data
 
   const handleClick = (e) => {
     e.preventDefault();
 
-    const newData = {
-      id: Date.now(),
-      name: name,
-      email: email,
-      number: number,
-
-
-    };
-
-    setInputData([...inputData, newData]);
-
-    setName("");
-    setEmail("");
-    setNumber("");
-    setPhoto("");
-
-    // console.log(inputData);
+    createTeachers();
   };
-
-  // Delete data
-
-  const handleDelete = (id) => {
-
-    const updatedData = inputData.filter((filteredData) => filteredData.id !== id);
-    setInputData(updatedData);
-
-  }
 
   return (
     <>
@@ -90,22 +125,33 @@ const Teacher = () => {
               </thead>
             </table>
 
-            {inputData.map((newData, index) => {
+            {teachers.map((newData, index) => {
               return (
-
                 <div>
                   <table>
                     <tbody className="table-data-body">
                       <tr>
-                        <td className="teacher-headings-data-table name-teacher">{newData.name}</td>
-                        <td className="teacher-headings-data-table email-teacher">{newData.email}</td>
-                        <td className="teacher-headings-data-table number-teacher">{newData.number}</td>
-                        <td className="teacher-headings-data-table action-teacher"><button className="delete-teacher" onClick={() => handleDelete(newData.id)}>Delete</button></td>
+                        <td className="teacher-headings-data-table name-teacher">
+                          {newData.name}
+                        </td>
+                        <td className="teacher-headings-data-table email-teacher">
+                          {newData.email}
+                        </td>
+                        <td className="teacher-headings-data-table number-teacher">
+                          {newData.number}
+                        </td>
+                        <td className="teacher-headings-data-table action-teacher">
+                          <button
+                            className="delete-teacher"
+                            onClick={() => deleteTeacher(newData.id)}
+                          >
+                            Delete
+                          </button>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
-             
               );
             })}
           </div>
@@ -153,18 +199,7 @@ const Teacher = () => {
                     label="Enter Teacher's Phone #"
                   />
                 </div>
-                <div>
-                  <TextField
-                    name="teaher_photo"
-                    className="teacher-email-input"
-                    value={photo}
-                    onChange={(e) => handleNumberChange(e)}
-                    size="small"
-                    type="file"
-                    variant="standard"
-                    label="Upload Teacher's Photo"
-                  />
-                </div>
+
                 <button onClick={handleClick} className="add-teacher">
                   Add Teacher
                 </button>
