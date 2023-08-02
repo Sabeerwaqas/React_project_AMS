@@ -3,28 +3,28 @@ import { styled, useTheme } from "@mui/material/styles";
 // import "../Main/Sidebar/sidebar.css";
 import PersonIcon from "@mui/icons-material/Person";
 import { Link } from "react-router-dom";
-// import CameraIndoorIcon from "@mui/icons-material/CameraIndoor";
-import GridViewRoundedIcon from "@mui/icons-material/GridViewRounded";
+import CameraIndoorIcon from "@mui/icons-material/CameraIndoor";
+// import GridViewRoundedIcon from "@mui/icons-material/GridViewRounded";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import OtherHousesIcon from "@mui/icons-material/OtherHouses";
-import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+// import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
-import CssBaseline from "@mui/material/CssBaseline";
-import Typography from "@mui/material/Typography";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import HomeIcon from "@mui/icons-material/Home";
+// import Toolbar from "@mui/material/Toolbar";
+// import List from "@mui/material/List";
+// import CssBaseline from "@mui/material/CssBaseline";
+// import Typography from "@mui/material/Typography";
+// import Divider from "@mui/material/Divider";
+// import IconButton from "@mui/material/IconButton";
+// import MenuIcon from "@mui/icons-material/Menu";
+// import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+// import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+// import ListItem from "@mui/material/ListItem";
+// import ListItemButton from "@mui/material/ListItemButton";
+// import ListItemIcon from "@mui/material/ListItemIcon";
+// import ListItemText from "@mui/material/ListItemText";
+// import HomeIcon from "@mui/icons-material/Home";
 import firebase, { db } from "../../Firebase/firebase";
 import { collection, getDocs } from "firebase/firestore";
 const drawerWidth = 240;
@@ -202,17 +202,6 @@ export default function () {
               </div>
             </div>
             <small className="position-rel">Classes</small>
-          </div>
-          <div className="flex-child child-one">
-            <div className="flex-grandchild">
-              <div>
-                <RemoveRedEyeIcon className="icon-person" />
-              </div>
-              <div className="heading-parent">
-                <h2 className="heading-son">2</h2>
-              </div>
-            </div>
-            <small className="position-rel present">Today's Present</small>
           </div>
         </div>
       </Box>

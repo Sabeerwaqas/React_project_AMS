@@ -151,32 +151,40 @@ export default function () {
         <Divider />
         <List>
           {[
-            <Link to={"/"}>
-              <GridViewRoundedIcon className="sidebar-icons" />
-              <span className="navbar-label">Dashboard</span>
-            </Link>,
-            <Link to={"/students"}>
-              <PersonIcon className="sidebar-icons" />
-              <span className="navbar-label">Students</span>
-            </Link>,
-            <Link to={"/teachers"}>
-              <PeopleAltIcon className="sidebar-icons" />,
-              <span className="navbar-label">Teachers</span>
-            </Link>,
-            <Link to={"/classes"}>
-              <OtherHousesIcon />
-              <span className="navbar-label">Classes</span>
-            </Link>,
-          ].map((text, index) => (
+            {
+              icon: <GridViewRoundedIcon className="sidebar-icons" />,
+              text: "Dashboard",
+              link: "/",
+            },
+            {
+              icon: <PersonIcon className="sidebar-icons" />,
+              text: "Students",
+              link: "/students",
+            },
+            {
+              icon: <PeopleAltIcon className="sidebar-icons" />,
+              text: "Teachers",
+              link: "/teachers",
+            },
+            {
+              icon: <OtherHousesIcon />,
+              text: "Classes",
+              link: "/classes",
+            },
+          ].map(({ icon, text, link }, index) => (
             <ListItem key={text} disablePadding sx={{ display: "block" }}>
               <ListItemButton
+                component={Link}
+                to={link}
                 sx={{
-                  minHeight: 48,
+                  minHeight: 18,
                   justifyContent: open ? "initial" : "center",
                   px: 2.5,
+                  marginTop: "20px"
                 }}
               >
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                {open && icon}
+                <ListItemText primary={open ? text : null} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
           ))}
