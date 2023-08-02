@@ -79,6 +79,21 @@ body{
 
 }
 
+.logout-button{
+    background-color: white;
+    border: none;
+    box-shadow: 2px 0px 10px 2px gainsboro;
+    margin-top: 10%;
+    width: 100%;
+    padding: 2%;
+    font-weight: bold;
+
+}
+
+.logout-btn-parent{
+    display: block;
+}
+
 /* Media queries */
 
 /* For 481px */

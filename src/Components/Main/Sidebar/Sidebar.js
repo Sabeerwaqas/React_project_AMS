@@ -176,9 +176,9 @@ export default function () {
             <Link to={"/classes"}>
               <OtherHousesIcon />
               <span className="navbar-label">Classes</span>
-              <span>
-                <button onClick={handleLogout}>Logout</button>
-              </span>
+              {/* <span className="logout-btn-parent">
+                <button className="logout-button" onClick={handleLogout}>Logout</button>
+              </span> */}
             </Link>,
           ].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: "block" }}>
@@ -189,44 +189,16 @@ export default function () {
                   px: 2.5,
                 }}
               >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                ></ListItemIcon>
-
                 <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
           ))}
         </List>
-        <Divider />
-        <List>
-          {["Attendance"].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  {index % 2 === 0 ? <HomeIcon /> : ""}
-                </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
+        <span className="logout-btn-parent">
+          <button className="logout-button" onClick={handleLogout}>
+            Logout
+          </button>
+        </span>
       </Drawer>
     </Box>
   );

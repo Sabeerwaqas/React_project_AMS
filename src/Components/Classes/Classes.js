@@ -1,101 +1,92 @@
 import React, { useEffect, useState } from "react";
-import "../Students/student.css";
+import "./student.css";
 import { TextField } from "@mui/material";
-import { db, auth } from "../../Firebase/firebase";
-import {
-  collection,
-  getDocs,
-  addDoc,
-  doc,
-  deleteDoc,
-} from "firebase/firestore";
-// import { deleteUser } from "firebase/firestore";
+import { db } from "../../Firebase/firebase";
+import { collection, getDocs, addDoc, doc, deleteDoc } from "firebase/firestore";
 
 const Classes = () => {
+  // State variables
   const [className, setClassName] = useState("");
   const [classTeacher, setClassTeacher] = useState("");
-  const [classLimit, setClassLimit] = useState();
-
-  const [inputData, setInputData] = useState([]);
-
+  const [classLimit, setClassLimit] = useState("");
   const [classes, setClasses] = useState([]);
-  const usersCollectionRef = collection(db, "classes");
 
+  // Firestore collection reference
+  const classesCollectionRef = collection(db, "classes");
+
+  // Function to create a class in Firestore
   const createClass = async () => {
     try {
-      await addDoc(usersCollectionRef, {
-        class: className,
-        teacher: classTeacher,
-        limit: classLimit,
+      // Add the class data to Firestore
+      await addDoc(classesCollectionRef, {
+        className: className,
+        classTeacher: classTeacher,
+        classLimit: classLimit,
       });
       console.log("Class added successfully!");
-  
+
+      // Update the state with the new class data
       const newData = {
-        id: Date.now(),
         className: className,
         classTeacher: classTeacher,
         classLimit: classLimit,
       };
-  
+
       setClasses((prevClasses) => [...prevClasses, newData]);
+
+      // Clear the input fields after adding a class
+      setClassName("");
+      setClassTeacher("");
+      setClassLimit("");
     } catch (error) {
       console.error("Error adding class:", error);
     }
   };
 
+  // Function to delete a class from Firestore
+  const deleteClass = async (id) => {
+    try {
+      const classDoc = doc(db, "classes", id);
+      await deleteDoc(classDoc);
+
+      // Update the state after deleting the class
+      setClasses((prevClasses) =>
+        prevClasses.filter((classData) => classData.id !== id)
+      );
+
+      console.log("Class deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting class:", error);
+    }
+  };
+
+  // Fetch classes data from Firestore on component mount
   useEffect(() => {
-    const getUsers = async () => {
-      const querySnapshot = await getDocs(usersCollectionRef);
-      const classesData = querySnapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-      setClasses(classesData);
-    };  
-  
-    getUsers();
-  }, []);
-  
-  const handleClassName = (e) => {
-    const className = e.target.value;
-    setClassName(className);
-  };
-
-  const handleClassTeacher = (e) => {
-    const classTeacher = e.target.value;
-    setClassTeacher(classTeacher);
-  };
-
-  const handleClassLimit = (e) => {
-    const classLimit = e.target.value;
-    setClassLimit(classLimit);
-  };
-
-  const handleClick = (e) => {
-    e.preventDefault();
-
-    const newData = {
-      id: Date.now(),
-      className: className,
-      classTeacher: classTeacher,
-      classLimit: classLimit,
+    const getClasses = async () => {
+      try {
+        const querySnapshot = await getDocs(classesCollectionRef);
+        const classesData = querySnapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        setClasses(classesData);
+      } catch (error) {
+        console.error("Error fetching classes:", error);
+      }
     };
 
-    setInputData([...inputData, newData]);
+    getClasses();
+  }, []);
 
+  // Event handlers for input fields
+  const handleClassName = (e) => setClassName(e.target.value);
+  const handleClassTeacher = (e) => setClassTeacher(e.target.value);
+  const handleClassLimit = (e) => setClassLimit(e.target.value);
+
+  // Event handler for adding a class
+  const handleClick = (e) => {
+    e.preventDefault();
     createClass();
-
-    setClassName("");
-    setClassTeacher("");
-    setClassLimit("");
-  };
-
-  const deleteUser = async (id) => {
-    const userDoc = doc(db, "classes", id);
-    await deleteDoc(userDoc);
-    setClasses((prevClasses) =>
-      prevClasses.filter((classData) => classData.id !== id)
-    );
   };
 
   return (
@@ -116,8 +107,8 @@ const Classes = () => {
                 </tr>
               </thead>
               <tbody>
-                {classes.map((classData, index) => (
-                  <tr key={index}>
+                {classes.map((classData) => (
+                  <tr key={classData.id}>
                     <td className="teacher-headings-data-table email-teacher">
                       {classData.className}
                     </td>
@@ -130,7 +121,7 @@ const Classes = () => {
                     <td className="teacher-headings-data-table action-teacher">
                       <button
                         className="delete-teacher"
-                        onClick={() => deleteUser(classData.id)}
+                        onClick={() => deleteClass(classData.id)}
                       >
                         Delete
                       </button>
@@ -162,7 +153,7 @@ const Classes = () => {
                 </div>
                 <div>
                   <TextField
-                    name="father_name"
+                    name="class_teacher"
                     className="teacher-email-input"
                     value={classTeacher}
                     onChange={handleClassTeacher}
@@ -174,7 +165,7 @@ const Classes = () => {
                 </div>
                 <div>
                   <TextField
-                    name="class"
+                    name="class_limit"
                     className="teacher-email-input"
                     value={classLimit}
                     onChange={handleClassLimit}
