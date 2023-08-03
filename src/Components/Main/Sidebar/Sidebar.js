@@ -22,6 +22,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
+import { Icon } from "@mui/material";
 
 const drawerWidth = 240;
 
@@ -180,11 +181,14 @@ export default function () {
                   minHeight: 18,
                   justifyContent: open ? "initial" : "center",
                   px: 2.5,
-                  marginTop: "20px"
+                  marginTop: "20px",
                 }}
               >
                 {open && icon}
-                <ListItemText primary={open ? text : null} sx={{ opacity: open ? 1 : 0 }} />
+                <ListItemText
+                  primary={open ? text : icon}
+                  sx={{ opacity: open ? 1 : 1 }}
+                />
               </ListItemButton>
             </ListItem>
           ))}
