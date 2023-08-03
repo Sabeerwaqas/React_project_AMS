@@ -4,6 +4,8 @@ import { Box, TextField } from "@mui/material";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../Firebase/firebase.js";
 import { Link, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -26,10 +28,24 @@ const Login = () => {
         const errorMessage = error.message;
         // Handle the error
       });
+
+    toast.success("LoggedIn Successful");
   };
 
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <div className="signup-box">
         <h4 className="signup-heading">
           <Link to={"/login"}>LogIn</Link>
