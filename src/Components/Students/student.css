@@ -6,7 +6,7 @@ body{
 
 .flex-container{
     display: flex;
-    margin-top: 10%;
+    margin-top: 7%;
     height: 80vh;
     justify-content: space-around;
 }
