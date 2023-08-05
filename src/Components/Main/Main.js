@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import PersonIcon from "@mui/icons-material/Person";
+import "./main.css"
 import { Link } from "react-router-dom";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import OtherHousesIcon from "@mui/icons-material/OtherHouses";
@@ -149,12 +150,12 @@ export default function () {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{ flexGrow: 1, p: 0 }}>
         <DrawerHeader />
         <div className="flex-dashboard">
           <div className="flex-child child-one">
             <div className="flex-grandchild">
-              <div>
+              <div className="icon-one-parent">
                 <PersonIcon className="icon-person icon-one" />
               </div>
               <div className="heading-parent">
@@ -163,7 +164,7 @@ export default function () {
             </div>
             <small className="position-rel">Students</small>
           </div>
-          <div className="flex-child child-one">
+          <div className="flex-child child-one child-two">
             <div className="flex-grandchild">
               <div>
                 <PeopleAltIcon className="icon-person" />
@@ -174,7 +175,7 @@ export default function () {
             </div>
             <small className="position-rel">Teachers</small>
           </div>
-          <div className="flex-child child-one">
+          <div className="flex-child child-one child-three">
             <div className="flex-grandchild">
               <div>
                 <OtherHousesIcon className="icon-person" />

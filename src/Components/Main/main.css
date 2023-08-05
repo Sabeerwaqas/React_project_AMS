@@ -3,3 +3,150 @@ body{
     padding: 0;
     box-sizing: border-box; 
 }
+
+/* Media query */
+
+/* For 980px */
+
+@media screen and (max-width: 980px) {
+
+    .flex-dashboard{
+        margin-top: 10%;
+    }
+
+
+    .child-one{
+        margin-left: 5%;
+        padding: 7% !important;
+        width: 25vw !important;
+    }
+            
+  .icon-person{
+    margin-left: 20%;
+  }
+
+}
+
+/* For 767px */
+
+@media screen and (max-width: 980px) {
+
+    .flex-dashboard{
+        margin-top: 20%;
+    }
+
+
+    .child-one{
+        margin-left: 8%;
+        padding: 7% !important;
+        width: 25vw !important;
+    }
+            
+  .icon-person{
+    margin-left: 20%;
+  }
+
+}
+
+/* For 600px */
+
+@media screen and (max-width: 600px) {
+
+    .flex-dashboard{
+        display: block !important;
+        margin-top: 5%;
+    }
+
+
+    .child-one{
+        margin-left: 30%;
+        padding: 7% !important;
+        width: 50vw !important;
+    }
+    
+    .child-two{
+        margin-top: 5%;
+    }
+
+    .child-three{
+        margin-top: 5%;
+    }
+
+  .icon-person{
+    margin-left: 20%;
+  }
+
+}
+
+/* For 498px */
+
+@media screen and (max-width: 498px) {
+
+    .flex-dashboard{
+        display: block !important;
+        margin-top: 8%;
+    }
+
+
+    .child-one{
+        margin-left: 30%;
+        padding: 10% !important;
+        width: 50vw !important;
+        height: 25vh;
+    }
+    
+    .child-two{
+        margin-top: 5%;
+    }
+
+    .child-three{
+        margin-top: 5%;
+    }
+
+  .icon-person{
+    margin-left: 20%;
+  }
+
+}
+
+/* For 360px */
+
+@media screen and (max-width: 360px) {
+
+    .flex-dashboard{
+        display: block !important;
+        margin-top: 15%;
+    }
+
+
+    .child-one{
+        margin-left: 30%;
+        padding: 10% !important;
+        width: 60vw !important;
+        height: 20vh;
+    }
+    
+    .child-two{
+        margin-top: 5%;
+    }
+
+    .child-three{
+        margin-top: 5%;
+    }
+
+  .icon-person{
+    margin-left: 20%;
+    margin-top: 15%;
+  }
+
+  .position-rel{
+    position: relative;
+    top: 90% !important;
+  }
+
+  .heading-son{
+    position: relative;
+    right: 50%;
+  }
+
+}

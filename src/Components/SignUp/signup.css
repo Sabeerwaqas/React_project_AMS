@@ -31,25 +31,45 @@ body{
     justify-content: space-around;
     flex-direction: row;
     top: 5%;
-    margin-left: 20%;
+    margin-left: 25%;
     font-size: 1.5rem;
-    /* margin-top: 2%; */
-
 }
 
-.email-input{
-    position: absolute !important;
-    top: 31%;
-}
 
-.special-input{
-    margin-top: 10% !important;
-}
 
-.special-btn{
-    position: absolute;
-    bottom: 28%;
-    left: 42.5%;
-    padding: 0.5%;
-}
 
+
+/* Media query */
+
+/* For mobile */
+
+@media screen and (max-width: 600px) {
+
+    .signup-box{
+        background-color: #FFFFFF;
+        box-shadow: 1px 1px 10px 3px lightgrey;
+        width: 90vw;
+        height: 70vh;
+        margin: 0 auto;
+        margin-top: 25%;
+    
+    }
+
+    .signup-email-input{
+        width: 55vw;
+        margin-top: 10% !important;
+    }
+
+    .signup-btn{
+        background-color: skyblue;
+        font-weight: bold;
+        border: none;
+        width: 55vw;
+        margin-top: 20%;
+        padding: 2%;
+        
+
+    }
+    
+    
+}

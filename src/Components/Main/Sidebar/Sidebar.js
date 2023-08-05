@@ -155,7 +155,7 @@ export default function () {
             {
               icon: <GridViewRoundedIcon className="sidebar-icons" />,
               text: "Dashboard",
-              link: "/",
+              link: "/main",
             },
             {
               icon: <PersonIcon className="sidebar-icons" />,

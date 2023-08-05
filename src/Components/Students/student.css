@@ -6,7 +6,7 @@ body{
 
 .flex-container{
     display: flex;
-    margin-top: 7%;
+    margin-top: 10%;
     height: 80vh;
     justify-content: space-around;
 }
@@ -110,12 +110,13 @@ body{
 
 /* For 1025px */
 
-@media screen and (max-width: 1025px) {
+/* @media screen and (max-width: 1025px) { */
 
-    .flex-container{
+    /* .flex-container{
+        display: block; */
+        /* flex-direction: column; */
+        /* margin-top: 10%;
         
-        margin-top: 10%;
-       
     }
 
     .teacher-headings-data{
@@ -143,7 +144,7 @@ body{
     
 
     
-}
+} */
 
 /* For 769px */
 
@@ -151,8 +152,30 @@ body{
 
     .flex-container{
         
+        display: block;
+        flex-direction: column-reverse;
         margin-top: 10%;
        
+    }
+
+    .flex-child-one{
+        width: 70vw;
+        margin-left: 20%;
+        position: relative;
+        top: 10%;
+        
+    }
+
+    .flex-child-two{
+        width: 70vw;
+        margin-left: 20%;
+        position: relative;
+        top: 10%;
+    }
+
+    .teacher-email-input{
+        margin-top: 8% !important;
+        width: 50vw;
     }
 
     .teacher-headings-data{
@@ -175,12 +198,6 @@ body{
         width: 12%;
         text-align: center;
     }
-
-    
-    
-    
-
-    
 }
 
 /* For 481px */
@@ -189,8 +206,9 @@ body{
 
     .flex-container{
         
+
         margin-top: 10%;
-        flex-direction: column-reverse;
+        flex-direction: column;
        
     }
 

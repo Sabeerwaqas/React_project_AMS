@@ -14,6 +14,12 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!email || !password) {
+      toast.warning("Please fill the form.");
+      return;
+    }
+  
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in successfully
@@ -46,6 +52,7 @@ const Login = () => {
         pauseOnHover
         theme="dark"
       />
+      <h2 className="ams">Attendance Management System</h2>
       <div className="signup-box">
         <h4 className="signup-heading">
           <Link to={"/"}>LogIn</Link>
@@ -64,6 +71,7 @@ const Login = () => {
             <TextField
               variant="standard"
               label="Email"
+              className="login-input-email"
               type="email"
               onChange={(e) => setEmail(e.target.value)}
               sx={{
@@ -75,6 +83,7 @@ const Login = () => {
               label="Password"
               type="password"
               onChange={(e) => setPassword(e.target.value)}
+              className="login-input-password"
               sx={{
                 marginTop: "4%",
               }}

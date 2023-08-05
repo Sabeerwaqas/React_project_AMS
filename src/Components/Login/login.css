@@ -1,0 +1,113 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #F2F5F8;
+}
+
+.signup-box{
+    background-color: #FFFFFF;
+    box-shadow: 1px 1px 10px 3px lightgrey;
+    width: 25vw;
+    height: 60vh;
+    margin: 0 auto;
+    margin-top: 7%;
+
+}
+
+.signup-btn{
+    background-color: skyblue;
+    font-weight: bold;
+    border: none;
+    width: 14.8vw;
+    margin-top: 20%;
+    padding: 2%;
+}
+
+.signup-heading{
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    justify-content: space-around;
+    flex-direction: row;
+    top: 5%;
+    margin-left: 25%;
+    font-size: 1.5rem;
+    /* margin-top: 2%; */
+
+}
+
+.email-input{
+    position: absolute !important;
+    top: 31%;
+}
+
+.special-input{
+    margin-top: 10% !important;
+}
+
+.special-btn{
+    position: absolute;
+    bottom: 28%;
+    left: 42.5%;
+    padding: 0.5%;
+}
+
+/* Media query */
+
+/* For mobile */
+
+@media screen and (max-width: 600px) {
+
+
+    .signup-heading{
+     position: relative;
+     right: 10%;
+    }
+
+    .signup-box{
+        background-color: #FFFFFF;
+        box-shadow: 1px 1px 10px 3px lightgrey;
+        width: 90vw;
+        height: 75vh;
+        margin: 0 auto;
+        margin-top: 10%;
+    
+    }
+
+    .signup-input {
+        width: 55vw;
+        margin-top: 10% !important;
+    }
+
+    .login-input-email{
+
+        width: 55vw;
+        margin-top: 10% !important;
+
+    }
+
+    .login-input-password{
+        /* background-color: aqua; */
+        width: 55vw;
+        margin-top: 30% !important;
+    }
+
+    .signup-btn{
+        background-color: skyblue;
+        font-weight: bold;
+        border: none;
+        width: 55vw;
+        margin-top: 20%;
+        padding: 2%;
+        position: relative;
+        /* right: 3%; */
+    }
+    
+    .ams{
+        /* margin-left: 3%; */
+        font-size: 2rem;
+        text-align: center;
+    }
+    
+}

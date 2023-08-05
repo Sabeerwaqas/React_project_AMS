@@ -4,13 +4,26 @@ import { Box, TextField } from "@mui/material";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../Firebase/firebase.js";
 import { Link } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [retypePassword, setRetypePassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (password !== retypePassword) {
+      toast.warning("Please type the same password.");
+      return;
+    }
+
+    if (!email || !password) {
+      toast.warning("Please fill all the forms.");
+      return;
+    }
+
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed up
@@ -24,17 +37,32 @@ const Signup = () => {
         console.error("Signup error:", errorCode, errorMessage);
         // You can display an error message here if needed
       });
+    toast.success("SignUp Successful");
   };
 
   return (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
+            <h2 className="ams">Attendance Management System</h2>
+
       <div className="signup-box">
         <h4 className="signup-heading">
           <Link to={"/"}>LogIn</Link>
         </h4>
         <h4 className="signup-heading">
           <Link to={"/signup"}>SignUp</Link>
-        </h4> 
+        </h4>
 
         <Box
           sx={{
@@ -46,7 +74,7 @@ const Signup = () => {
             <TextField
               variant="standard"
               label="Email"
-              className="signup-input email-input"
+              className=" signup-email-input"
               type="email"
               onChange={(e) => setEmail(e.target.value)}
               sx={{
@@ -73,7 +101,7 @@ const Signup = () => {
                 marginTop: "4%",
               }}
             />
-            <button type="submit" className="signup-btn special-btn">
+            <button type="submit" className="signup-btn">
               SignUp
             </button>
           </form>
