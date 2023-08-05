@@ -21,7 +21,7 @@ const Login = () => {
         console.log(user);
 
         // Redirect to the dashboard component
-        navigate("/");
+        navigate("/main");
       })
       .catch((error) => {
         const errorCode = error.code;
