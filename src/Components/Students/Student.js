@@ -10,11 +10,15 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const Student = () => {
   const [className, setClassName] = useState("");
   const [fatherName, setFatherName] = useState("");
   const [studentName, setStudentName] = useState("");
   const [students, setStudents] = useState([]);
+  const [error, setError] = useState("");
 
   const studentsCollectionRef = collection(db, "students");
 
@@ -57,7 +61,7 @@ const Student = () => {
       console.error("Error deleting student:", error);
     }
   };
-  
+
   const getStudents = async () => {
     try {
       const querySnapshot = await getDocs(studentsCollectionRef);
@@ -73,30 +77,57 @@ const Student = () => {
 
   useEffect(() => {
     getStudents();
-  }, []);
+  }, [students]);
 
   const handleStudentName = (e) => {
     const studentName = e.target.value;
     setStudentName(studentName);
+    setError("");
   };
 
   const handleFatherName = (e) => {
     const fatherName = e.target.value;
     setFatherName(fatherName);
+    setError("");
   };
 
   const handleClass = (e) => {
     const className = e.target.value;
     setClassName(className);
+    setError("");
   };
 
   const handleClick = (e) => {
     e.preventDefault();
+
+    // Simple form validation
+    if (!studentName || !fatherName || !className) {
+      setError(toast.warning("Please fill all the requirements"));
+      
+
+      return;
+    }
+    else{
+      toast.success("Student Added Successfully.")
+    }
+
     createStudent();
   };
 
   return (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <div className="flex-container">
         <div className="flex-child-one">
           <div>
@@ -181,6 +212,7 @@ const Student = () => {
                     label="Enter Class"
                   />
                 </div>
+                {/* {error && <p className="error-message">{error}</p>} */}
                 <button onClick={handleClick} className="add-teacher">
                   Add Student
                 </button>

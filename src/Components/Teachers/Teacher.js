@@ -9,6 +9,8 @@ import {
   doc,
   deleteDoc,
 } from "firebase/firestore";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Teacher = () => {
   const [name, setName] = useState("");
@@ -16,6 +18,8 @@ const Teacher = () => {
   const [number, setNumber] = useState("");
   const [teachers, setTeachers] = useState([]);
   const teachersCollectionRef = collection(db, "teachersData");
+  const [error, setError] = useState("");
+
 
   const createTeachers = async () => {
     try {
@@ -72,7 +76,7 @@ const Teacher = () => {
 
   useEffect(() => {
     getTeacher();
-  }, []);
+  }, [teachers]);
 
   // const [inputData, setInputData] = useState([]);
 
@@ -81,19 +85,21 @@ const Teacher = () => {
   const handleNameChange = (e) => {
     const name = e.target.value;
     setName(name);
+    setError("");
     console.log(name);
   };
 
   const handleEmailChange = (e) => {
     const email = e.target.value;
     setEmail(email);
-
+    setError("");
     console.log(email);
   };
 
   const handleNumberChange = (e) => {
     const number = e.target.value;
     setNumber(number);
+    setError("");
     console.log(number);
   };
 
@@ -101,12 +107,30 @@ const Teacher = () => {
 
   const handleClick = (e) => {
     e.preventDefault();
+    if (!name || !email || !number) {
+      setError(toast.warning("Please fill all the requirements"));
+      return;
+    } else {
+      toast.success("Teacher Added Successfully.");
+    }
 
     createTeachers();
   };
 
   return (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <div className="flex-container">
         <div className="flex-child-one">
           <div>

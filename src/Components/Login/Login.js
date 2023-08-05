@@ -35,7 +35,7 @@ const Login = () => {
   return (
     <>
       <ToastContainer
-        position="top-right"
+        position="top-center"
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -44,11 +44,11 @@ const Login = () => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="light"
+        theme="dark"
       />
       <div className="signup-box">
         <h4 className="signup-heading">
-          <Link to={"/login"}>LogIn</Link>
+          <Link to={"/"}>LogIn</Link>
         </h4>
         <h4 className="signup-heading">
           <Link to={"/signup"}>SignUp</Link>

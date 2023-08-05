@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import "./student.css";
 import { TextField } from "@mui/material";
 import { db } from "../../Firebase/firebase";
@@ -10,11 +11,15 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const Classes = () => {
   const [className, setClassName] = useState("");
   const [classTeacher, setClassTeacher] = useState("");
   const [classLimit, setClassLimit] = useState("");
   const [classes, setClasses] = useState([]);
+  const [error, setError] = useState("");
 
   const classesCollectionRef = collection(db, "classes");
 
@@ -71,21 +76,50 @@ const Classes = () => {
     }
   };
   useEffect(() => {
-
     getClasses();
-  }, []);
+  }, [classes]);
 
-  const handleClassName = (e) => setClassName(e.target.value);
-  const handleClassTeacher = (e) => setClassTeacher(e.target.value);
-  const handleClassLimit = (e) => setClassLimit(e.target.value);
-
+  const handleClassName = (e) => {
+    const className = e.target.value;
+    setClassName(className);
+    setError("");
+  };
+  const handleClassTeacher = (e) => {
+    const classTeacher = e.target.value;
+    setClassTeacher(classTeacher);
+    setError("");
+  };
+  const handleClassLimit = (e) => {
+    const classLimit = e.target.value;
+    setClassLimit(classLimit);
+    setError("");
+  };
   const handleClick = (e) => {
     e.preventDefault();
+
+    if (!className || !classTeacher || !classLimit) {
+      setError(toast.warning("Please fill all the requirements"));
+      return;
+    } else {
+      toast.success("Class Added Successfully.");
+    }
     createClass();
   };
 
   return (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <div className="flex-container">
         <div className="flex-child-one">
           <div>

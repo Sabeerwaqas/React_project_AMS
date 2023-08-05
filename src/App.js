@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import Signup from "./Components/SignUp/Signup";
 import Login from "./Components/Login/Login";
-import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom"; 
+import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom";
 import Main from "./Components/Main/Main";
 import Sidebar from "./Components/Main/Sidebar/Sidebar";
 import Classes from "./Components/Classes/Classes";
 import Teacher from "./Components/Teachers/Teacher";
 import Student from "./Components/Students/Student";
-import { auth } from "./Firebase/firebase"; 
+import { auth } from "./Firebase/firebase";
 
 const App = () => {
-  const [user, setUser] = useState(null); 
+  const [user, setUser] = useState(null);
   const [isSignupPage, setIsSignupPage] = useState(false);
 
   useEffect(() => {
@@ -22,8 +22,7 @@ const App = () => {
       }
     });
 
-  
-    setIsSignupPage(window.location.pathname === "/signup");
+    setIsSignupPage(<Link to = "signup"/>);
 
     return () => unsubscribe();
   }, []);
@@ -31,29 +30,29 @@ const App = () => {
   return (
     <>
       <BrowserRouter>
-
         {user && <Sidebar />}
         <Routes>
-          {user ? ( 
+          {user ? (
             <>
-              <Route path="/" element={<Main />} />
+              <Route path="/main" element={<Main />} />
               <Route path="/students" element={<Student />} />
               <Route path="/teachers" element={<Teacher />} />
               <Route path="/classes" element={<Classes />} />
               {/* <Route path="/main" element={<Main />} /> */}
-
             </>
           ) : (
-            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Login />} />
           )}
-          {user && <Route path="/" element={<Navigate to="/" />} />}
-          {!user && isSignupPage && <Route path="/signup" element={<Signup />} />}
+          {user && <Route path="/main" element={<Navigate to="/main" />} />}
+          {!user && isSignupPage && (
+            <Route path="/signup" element={<Signup/>} />
+          )}
         </Routes>
-        {!user && isSignupPage && (
+        {/* {!user && isSignupPage && (
           <Link to="/signup">
             Signup
           </Link>
-        )}
+        )} */}
       </BrowserRouter>
     </>
   );
