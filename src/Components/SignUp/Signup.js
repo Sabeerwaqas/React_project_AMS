@@ -3,11 +3,12 @@ import "./signup.css";
 import { Box, TextField } from "@mui/material";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../Firebase/firebase.js";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Signup = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [retypePassword, setRetypePassword] = useState("");
@@ -28,16 +29,18 @@ const Signup = () => {
       .then((userCredential) => {
         // Signed up
         const user = userCredential.user;
-        console.log("User signed up:", user);
-        // You can display a success message or redirect to the login page here
+        // console.log("User signed up:", user);
+        // Redirect to the login page after successful signup
+        navigate("/main");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.error("Signup error:", errorCode, errorMessage);
-        // You can display an error message here if needed
       });
-    toast.success("SignUp Successful");
+    toast.success("SignUp Successfully");
+    // navigate("/");
+
   };
 
   return (
@@ -54,7 +57,7 @@ const Signup = () => {
         pauseOnHover
         theme="dark"
       />
-            <h2 className="ams">Attendance Management System</h2>
+      <h2 className="ams">Attendance Management System</h2>
 
       <div className="signup-box">
         <h4 className="signup-heading">
@@ -96,7 +99,7 @@ const Signup = () => {
               label="Re-Type Password"
               className="signup-input special-input"
               type="password"
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => setRetypePassword(e.target.value)}
               sx={{
                 marginTop: "4%",
               }}

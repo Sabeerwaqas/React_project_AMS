@@ -53,6 +53,10 @@ body{
     padding: 0.5%;
 }
 
+.ams{
+    text-align: center;
+}
+
 /* Media query */
 
 /* For mobile */
@@ -61,8 +65,9 @@ body{
 
 
     .signup-heading{
-     position: relative;
-     right: 10%;
+     /* position: relative;
+     right: 10%; */
+     margin-left: 25% !important;
     }
 
     .signup-box{
@@ -111,3 +116,80 @@ body{
     }
     
 }
+
+@media screen and (max-width: 480px) {
+
+    .signup-heading{
+        /* position: relative;
+        right: 10%; */
+        margin-left: 22% !important;
+       }
+
+       .signup-box{
+        background-color: #FFFFFF;
+        box-shadow: 1px 1px 10px 3px lightgrey;
+        width: 90vw;
+        height: 95vh !important;
+        margin: 0 auto;
+        margin-top: 10%;
+    
+    }
+
+    
+}
+
+@media screen and (max-width: 400px) {
+
+    .signup-heading{
+        /* position: relative;
+        right: 10%; */
+        margin-left: 20% !important;
+       }
+
+       .signup-box{
+        background-color: #FFFFFF;
+        box-shadow: 1px 1px 10px 3px lightgrey;
+        width: 90vw;
+        height: 75vh;
+        margin: 0 auto;
+        margin-top: 10%;
+    
+    }
+
+    
+}
+
+@media screen and (max-width: 360px) {
+
+    .signup-heading{
+        /* position: relative;
+        right: 10%; */
+        margin-left: 18% !important;
+       }
+
+       .signup-box{
+        background-color: #FFFFFF;
+        box-shadow: 1px 1px 10px 3px lightgrey;
+        width: 90vw;
+        height: 95vh !important;
+        margin: 0 auto;
+        margin-top: 10%;
+    
+    }}
+
+    /* @media screen and (max-width: 320px) {
+
+        .signup-heading{
+
+            margin-left: 18% !important;
+           }
+    
+           .signup-box{
+            background-color: #FFFFFF;
+            box-shadow: 1px 1px 10px 3px lightgrey;
+            width: 90vw;
+            height: 95vh !important;
+            margin: 0 auto;
+            margin-top: 10%;
+        
+        }} */

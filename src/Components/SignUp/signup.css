@@ -9,7 +9,7 @@ body{
     background-color: #FFFFFF;
     box-shadow: 1px 1px 10px 3px lightgrey;
     width: 25vw;
-    height: 60vh;
+    height: 70vh !important;
     margin: 0 auto;
     margin-top: 7%;
 
@@ -20,7 +20,7 @@ body{
     font-weight: bold;
     border: none;
     width: 14.8vw;
-    margin-top: 20%;
+    margin-top: 10% !important;
     padding: 2%;
 }
 
@@ -31,7 +31,7 @@ body{
     justify-content: space-around;
     flex-direction: row;
     top: 5%;
-    margin-left: 25%;
+    margin-left: 20% !important;
     font-size: 1.5rem;
 }
 
