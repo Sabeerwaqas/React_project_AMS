@@ -21,7 +21,7 @@ const Signup = () => {
     }
 
     if (!email || !password) {
-      toast.warning("Please fill all the forms.");
+      toast.warning("Please fill all the fields.");
       return;
     }
 
@@ -32,13 +32,16 @@ const Signup = () => {
         // console.log("User signed up:", user);
         // Redirect to the login page after successful signup
         navigate("/main");
+        toast.success("SignUp Successfully");
+
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.error("Signup error:", errorCode, errorMessage);
+        toast.success("User already exist.");
+
       });
-    toast.success("SignUp Successfully");
     // navigate("/");
 
   };
